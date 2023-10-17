@@ -1,9 +1,10 @@
 import { StyleSheet, View, Text, ActivityIndicator } from "react-native";
 import React, { useEffect } from "react";
 import { useAppSelector } from "@/components/utils/hooks/redux";
-import Colors from "config";
+import Colors, { currency, discountPercent, discountPeriod } from "config";
 import { __ } from "@/components/LanguageComponents/TranslateComponent/systemTranslatre";
 import { dateToTimestamp } from "@/components/utils/dateToTimestamp";
+import { calculateNextPeriod } from "@/components/utils/calculateNextPeriod";
 
 const OrderRightComponent = ({ langPage, order }) => {
   const customerTitle = __("Customer");
@@ -23,8 +24,20 @@ const OrderRightComponent = ({ langPage, order }) => {
   const deliveryTitle = __("Delivery");
   const deliveryService = __("Delivery Service");
   const expactedDateTitle = __("Expacted date");
+  const promoActionsTitle = __("Promo actions");
+  const couponCodeTitle = __("Gift card or coupon code");
+  const currentDuscountTitle = __("Your discount is");
+  const useBeforeTitle =__("Use before")
+  const nexDiscountTitle =__("Next discount")
+
   const theme = useAppSelector((state) => state.themeSlice.theme);
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;
+
+  const generateRandomOrderNumber = () => {
+    const min = 100000; // Minimum 6-digit number
+    const max = 999999; // Maximum 6-digit number
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  };
 
   useEffect(() => {}, [order]);
 
@@ -36,27 +49,13 @@ const OrderRightComponent = ({ langPage, order }) => {
     );
   }
 
+  const daysToAdd = Number(order.deliveryTime);
+  const timestamp = Number(dateToTimestamp(order.date));
+  const deliveryDateTime = calculateNextPeriod(daysToAdd, timestamp);
   
-const daysToAdd = Number(order.deliveryTime);
-const millisecondsInADay = 24 * 60 * 60 * 1000;
-const timestamp = Number(dateToTimestamp(order.date));
-const newTimestamp = timestamp + (daysToAdd * millisecondsInADay);
-
-// Convert newTimestamp to a Date object
-const dateObject = new Date(newTimestamp);
-
-const formattedDate = dateObject.toLocaleDateString(undefined, {
-  year: "numeric",
-  month: "2-digit",
-  day: "2-digit",
-});
-
-const formattedTime = dateObject.toLocaleTimeString(undefined, {
-  hour: "2-digit",
-  minute: "2-digit",
-});
-
-const deliveryDateTime = `${formattedDate} ${formattedTime}`;
+  const finalTotalAmount = order.finalTotalAmount ?? 0;
+  const newDicount = (finalTotalAmount / 100) * discountPercent;
+  const lastDiscountDayAction = calculateNextPeriod(discountPeriod, timestamp);
 
   return (
     <View
@@ -198,6 +197,7 @@ const deliveryDateTime = `${formattedDate} ${formattedTime}`;
         >
           {couponNumberTitle}
         </Text>
+        
         <Text
           style={{
             fontSize: 12,
@@ -209,6 +209,30 @@ const deliveryDateTime = `${formattedDate} ${formattedTime}`;
         >
           {order.currentCouponCode}
         </Text>
+        <Text
+          style={{
+            fontSize: 16,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 4,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {currentDuscountTitle}
+        </Text>
+        <Text
+          style={{
+            fontSize: 12,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 0,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {currency}{order.discount}
+        </Text>
+
+        {/* Separador */}
         <View style={{ height: 12 }} />
         <View
           style={{
@@ -584,8 +608,98 @@ const deliveryDateTime = `${formattedDate} ${formattedTime}`;
         >
           {deliveryDateTime}
         </Text>
-      </View>
+        {/* separador */}
+        <View style={{ height: 12 }} />
+        <View
+          style={{
+            width: "100%",
+            borderBottomColor: selectedTheme.borderLine,
+            borderBottomWidth: 1,
+          }}
+        />
 
+        <Text
+          style={{
+            fontSize: 20,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 24,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {promoActionsTitle}
+        </Text>
+        <Text
+          style={{
+            fontSize: 16,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 4,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {couponCodeTitle}
+        </Text>
+        <Text
+          style={{
+            fontSize: 12,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 0,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {generateRandomOrderNumber()}
+        </Text>
+        <Text
+          style={{
+            fontSize: 16,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 4,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {nexDiscountTitle}
+        </Text>
+        <Text
+          style={{
+            fontSize: 12,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 0,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {currency}
+          {newDicount.toFixed(2)}
+        </Text>
+
+        <Text
+          style={{
+            fontSize: 16,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 4,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {useBeforeTitle}
+        </Text>
+        <Text
+          style={{
+            fontSize: 12,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 0,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {lastDiscountDayAction}
+        </Text>
+
+
+      </View>
       <View style={{ height: 30 }} />
     </View>
   );

@@ -72,19 +72,19 @@ const ChecoutLeftItem = ({ langPage, order }) => {
       );
       if (promoItem) {
         const discountedAmount = promoItem.discount;
-        setDiscount(discountedAmount);
+        const discountInState = order.discount;
+        setDiscount(discountInState > 0 ? discountInState : discountedAmount);
+        
         dispatch(addDiscountToOrder({ id: order.id, discount: discount }));
       }
     }
   }, [discount]);
 
-  
-
   const dispatch = useAppDispatch();
 
   const confirmOrder = () => {
     if (order) {
-      const lang = langPage; // Replace with the appropriate language code
+      const lang = langPage; // Replace with  he appropriate language code
       dispatch(cartAllRemove());
       dispatch(currentPageChangeAction(""));
       dispatch(CustomerInProgressBarAction());
@@ -114,14 +114,9 @@ const ChecoutLeftItem = ({ langPage, order }) => {
         100;
     setTotal(total);
     dispatch(addTotalAmountToOrder({ id: order.id, totalAmount: total }));
-
   }, [discount, order, currentTax, currentShipping]);
 
-  useEffect(() => {
-    console.log("order ChecoutLeftFooter", order);
-  }, [order]);
-
- 
+  useEffect(() => {}, [order]);
 
   if (!order || !order.cart || order.cart.length === 0) {
     return (
