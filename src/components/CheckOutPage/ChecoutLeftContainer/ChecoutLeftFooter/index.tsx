@@ -73,12 +73,12 @@ const ChecoutLeftItem = ({ langPage, order }) => {
       if (promoItem) {
         const discountedAmount = promoItem.discount;
         const discountInState = order.discount;
-        setDiscount(discountInState > 0 ? discountInState : discountedAmount);
+        setDiscount(discountInState === 0 ? discountedAmount: discountInState  );
         
         dispatch(addDiscountToOrder({ id: order.id, discount: discount }));
       }
     }
-  }, [discount]);
+  }, [discount, order]);
 
   const dispatch = useAppDispatch();
 

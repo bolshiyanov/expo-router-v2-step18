@@ -78,7 +78,7 @@ const ordersSlice = createSlice({
         referyId: "",
         totalAmount: totalAmount,
         deliveryId: "0",
-        discount: -1,
+        discount: 0,
         shippingPrice: -1,
         totalAmountFromCart: 0,
 
