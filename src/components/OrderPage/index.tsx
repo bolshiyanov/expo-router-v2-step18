@@ -107,7 +107,7 @@ const OrderPage = ({ langPage }) => {
               <OrderRightComponent langPage={langPage} order={order} /> 
               <OrderLeftComponent langPage={langPage} order={order} />
 
-              <View style={{ height: 336 }} />
+              <View style={{ height: 30 }} />
             </ScrollView>
           </View>
         )}
