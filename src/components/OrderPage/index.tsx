@@ -24,12 +24,6 @@ const OrderPage = ({ langPage }) => {
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;
   const [order, setOrder] = useState({});
 
-  useEffect(() => {
-    dispatch(currentPageChangeAction("order"));
-    if (Platform.OS === "web") {
-      dispatch(fetchOrder());
-    }
-  }, []);
 
   const orders = useAppSelector((state) => state.ordersSlice.orders);
 
@@ -110,7 +104,7 @@ const OrderPage = ({ langPage }) => {
               style={{ width: "100%" }}
             >
               <OrderHeader langPage={langPage} order={order} />
-              {/* <OrderRightComponent langPage={langPage} order={order} /> */}
+              <OrderRightComponent langPage={langPage} order={order} /> 
               <OrderLeftComponent langPage={langPage} order={order} />
 
               <View style={{ height: 336 }} />

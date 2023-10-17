@@ -3,7 +3,7 @@ export const shippingArray = [
     id: "0",
     image: "",
     region: "",
-    tax: 0,
+    tax: -1,
     deliveryOptions: [],
   },
   {

@@ -14,6 +14,7 @@ import { RemoveAllInProgressBarAction } from "@/store/reducers/ProgressBarSlice"
 import { removeOrder, saveOrder } from "@/store/reducers/OrdersSlice";
 import { useRouter } from "expo-router";
 import { cartAllRemove } from "@/store/reducers/CartSlice";
+import { currentPageChangeAction } from "@/store/reducers/CurrentPageSlice";
 
 const CheckoutRightPayment = ({ order }) => {
   const [shonButton, setShonButton] = useState(true);
@@ -41,8 +42,8 @@ const CheckoutRightPayment = ({ order }) => {
     dispatch(RemoveAllInProgressBarAction());
     dispatch(saveOrder({ id: order.id }));
     dispatch(removeOrder({ id: order.id }));
-    //dispatch(cartAllRemove());
-    router.replace("/order");
+    dispatch(currentPageChangeAction("order"));
+    router.replace("/order"); 
   };
 
   return (

@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useAppSelector } from "@/components/utils/hooks/redux";
 import Colors from "config";
 import { __ } from "@/components/LanguageComponents/TranslateComponent/systemTranslatre";
+import { dateToTimestamp } from "@/components/utils/dateToTimestamp";
 
 const OrderRightComponent = ({ langPage, order }) => {
   const customerTitle = __("Customer");
@@ -21,6 +22,7 @@ const OrderRightComponent = ({ langPage, order }) => {
   const shippedToTitle = __("Shipped to:");
   const deliveryTitle = __("Delivery");
   const deliveryService = __("Delivery Service");
+  const expactedDateTitle = __("Expacted date");
   const theme = useAppSelector((state) => state.themeSlice.theme);
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;
 
@@ -33,6 +35,28 @@ const OrderRightComponent = ({ langPage, order }) => {
       </View>
     );
   }
+
+  
+const daysToAdd = Number(order.deliveryTime);
+const millisecondsInADay = 24 * 60 * 60 * 1000;
+const timestamp = Number(dateToTimestamp(order.date));
+const newTimestamp = timestamp + (daysToAdd * millisecondsInADay);
+
+// Convert newTimestamp to a Date object
+const dateObject = new Date(newTimestamp);
+
+const formattedDate = dateObject.toLocaleDateString(undefined, {
+  year: "numeric",
+  month: "2-digit",
+  day: "2-digit",
+});
+
+const formattedTime = dateObject.toLocaleTimeString(undefined, {
+  hour: "2-digit",
+  minute: "2-digit",
+});
+
+const deliveryDateTime = `${formattedDate} ${formattedTime}`;
 
   return (
     <View
@@ -152,49 +176,48 @@ const OrderRightComponent = ({ langPage, order }) => {
           }}
         />
 
-        
-            <Text
-              style={{
-                fontSize: 20,
-                textAlign: "left",
-                padding: 12,
-                paddingVertical: 24,
-                color: selectedTheme.subTitle,
-              }}
-            >
-              {couponTitle}
-            </Text>
-            <Text
-              style={{
-                fontSize: 16,
-                textAlign: "left",
-                padding: 12,
-                paddingVertical: 4,
-                color: selectedTheme.subTitle,
-              }}
-            >
-              {couponNumberTitle}
-            </Text>
-            <Text
-              style={{
-                fontSize: 12,
-                textAlign: "left",
-                padding: 12,
-                paddingVertical: 0,
-                color: selectedTheme.subTitle,
-              }}
-            >
-              {order.currentCouponCode}
-            </Text>
-            <View style={{ height: 12 }} />
-            <View
-              style={{
-                width: "100%",
-                borderBottomColor: selectedTheme.borderLine,
-                borderBottomWidth: 1,
-              }}
-            />
-          
+        <Text
+          style={{
+            fontSize: 20,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 24,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {couponTitle}
+        </Text>
+        <Text
+          style={{
+            fontSize: 16,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 4,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {couponNumberTitle}
+        </Text>
+        <Text
+          style={{
+            fontSize: 12,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 0,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {order.currentCouponCode}
+        </Text>
+        <View style={{ height: 12 }} />
+        <View
+          style={{
+            width: "100%",
+            borderBottomColor: selectedTheme.borderLine,
+            borderBottomWidth: 1,
+          }}
+        />
+
         <Text
           style={{
             fontSize: 20,
@@ -537,6 +560,29 @@ const OrderRightComponent = ({ langPage, order }) => {
           }}
         >
           {order.deliveryCompanyName}
+        </Text>
+
+        <Text
+          style={{
+            fontSize: 16,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 4,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {expactedDateTitle}
+        </Text>
+        <Text
+          style={{
+            fontSize: 12,
+            textAlign: "left",
+            padding: 12,
+            paddingVertical: 0,
+            color: selectedTheme.subTitle,
+          }}
+        >
+          {deliveryDateTime}
         </Text>
       </View>
 

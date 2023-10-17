@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import { useAppSelector, useAppDispatch } from "@/components/utils/hooks/redux";
-import Colors, { currency, shippingArray } from "config";
+import Colors, { currency } from "config";
 import { useWidth } from "@/components/utils/useWidth";
 import { __ } from "@/components/LanguageComponents/TranslateComponent/systemTranslatre";
 import { TabBarIcon } from "@/components/navigatorComponents/tab-bar-icon";
@@ -23,6 +23,7 @@ import { currentPageChangeAction } from "@/store/reducers/CurrentPageSlice";
 import { cartAllRemove } from "@/store/reducers/CartSlice";
 import { discountData } from "config";
 import { CustomerInProgressBarAction } from "@/store/reducers/ProgressBarSlice";
+import { shippingArray } from "@/data/shippingArray";
 
 const ChecoutLeftItem = ({ langPage, order }) => {
   const subtotal = __("Subtotal");
@@ -36,6 +37,7 @@ const ChecoutLeftItem = ({ langPage, order }) => {
   );
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;
   const customer = useAppSelector((state) => state.progressBarSlice.customer);
+  const payment = useAppSelector((state) => state.progressBarSlice.payment);
   const isMiddle = useWidth(768);
   const [currentTax, setCurrentTax] = useState(-1);
   const [currentShipping, setCurrentShipping] = useState(-1);
@@ -54,7 +56,7 @@ const ChecoutLeftItem = ({ langPage, order }) => {
         (item) => item.id === selectedValue
       );
       if (selectedInPicker) {
-        setCurrentShipping(selectedInPicker.shippingPrice);
+        setCurrentShipping(-1);
         setCurrentTax(selectedInPicker.tax);
       }
     } else {
@@ -75,6 +77,8 @@ const ChecoutLeftItem = ({ langPage, order }) => {
       }
     }
   }, [discount]);
+
+  
 
   const dispatch = useAppDispatch();
 
@@ -109,13 +113,15 @@ const ChecoutLeftItem = ({ langPage, order }) => {
         (correctTaxPercent ?? 0)) /
         100;
     setTotal(total);
+    dispatch(addTotalAmountToOrder({ id: order.id, totalAmount: total }));
 
-    //dispatch(addTotalAmountToOrder({ id: order.id, totalAmount: total }));
   }, [discount, order, currentTax, currentShipping]);
 
   useEffect(() => {
     console.log("order ChecoutLeftFooter", order);
   }, [order]);
+
+ 
 
   if (!order || !order.cart || order.cart.length === 0) {
     return (

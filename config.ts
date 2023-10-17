@@ -26,7 +26,7 @@ export const Colors = {
     backgroundNav: "#e4e6eb",
     borderLine: "#caccce",
     tint: tintColorLight,
-    check: '#1FDA8A',
+    check: "#1FDA8A",
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorLight,
     iconColors: "rgba(0, 0, 0, 1)",
@@ -44,7 +44,7 @@ export const Colors = {
     backgroundNav: "#18191a",
     borderLine: "#3a3b3c",
     tint: tintColorDark,
-    check: '#1FDA8A',
+    check: "#1FDA8A",
     tabIconDefault: "#ccc",
     tabIconSelected: tintColorDark,
     transporentTop: "rgba(0, 0, 0, 0)",
@@ -72,38 +72,10 @@ export const discountData = [
   { code: "password", discount: 50 },
 ];
 
-
-export const shippingArray = [
-  { id: "0", region: "Shipping",shippingPrice: 0, tax: 0, deliveryTime:0},
-  { id: "1", region: "Spain",shippingPrice: 50, tax: 11, deliveryTime: 5},
-  { id: "2", region: "France", shippingPrice: 60, tax: 22, deliveryTime:6},
-  { id: "3", region: "Germany", shippingPrice: 60,tax:7 , deliveryTime:7},
-  { id: "4", region: "Italy", shippingPrice: 60,tax: 4, deliveryTime:4},
-  { id: "5", region: "United Kingdom", shippingPrice: 60,tax: 24, deliveryTime:8 },
-  { id: "6", region: "Russia", shippingPrice: 100, tax: 18, deliveryTime:15},
-  { id: "7", region: "Turkey", shippingPrice: 76,tax: 22, deliveryTime:8 },
-  { id: "8", region: "Poland", shippingPrice: 10,tax: 25, deliveryTime:12},
-  { id: "9", region: "Island", shippingPrice: 110,tax: 14, deliveryTime:12 },
-  { id: "10", region: "Andora", shippingPrice: 100, tax: 18, deliveryTime:5},  
-];
-
-export const AshippingArray = [
-  {
-    id: "1",
-    image: "",
-    region: "Spain",
-    deliveryOptions: [
-      { deliveryCompanyName: 'UPS', shippingPrice: 50, deliveryTime: 2 },
-      { deliveryCompanyName: 'FedEX', shippingPrice: 60, deliveryTime: 3 },
-      { deliveryCompanyName: 'DHL', shippingPrice: 30, deliveryTime: 7 },
-      { deliveryCompanyName: 'Amazon Logistic', shippingPrice: 45, deliveryTime: 6 },
-      { deliveryCompanyName: 'United States Postal Service', shippingPrice: 15, deliveryTime: 16 }
-    ]
-  }
-];
-
-
-
-
-
-
+//In this function, you can add logic to create a new coupon
+ //for a discount in percent for the next payment, and you can 
+ //also add a period in days during which this coupon can be used.
+export const createNewCoupone = ({tot}) => {
+  const discount = 5;
+  const period = 365;
+};

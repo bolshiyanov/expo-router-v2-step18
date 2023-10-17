@@ -380,7 +380,7 @@ const ordersSlice = createSlice({
 
       if (existingOrder) {
         // Update the existing order with the new data
-        existingOrder.totalAmount = totalAmount;
+        existingOrder.finalTotalAmount = totalAmount;
 
         if (Platform.OS === "web") {
           localStorage.setItem("orders", JSON.stringify(state.orders));

@@ -20,7 +20,7 @@ import CustomModal from "@/components/common/CustomModal";
 const CheckoutRightBilling = ({ order }) => {
   const dispatch = useDispatch();
   const customerTitle = __("Customer");
-  const adressTitle = __("Fill in your Billing/Shipping Address");
+  const adressTitle = __("Fill in your Billing/Shipping Address"); 
   const emailTitle = __("Your email address");
   const billingAdress = __("Billing address");
   const firstNameTitle = __("First name");
@@ -28,7 +28,6 @@ const CheckoutRightBilling = ({ order }) => {
   const addressLine1Title = __("Address line 1");
   const addressLine2Title = __("Address line 2");
   const cityTitle = __("City");
-  const countryTitle = __("Country/Region");
   const provinceTitle = __("Province/State");
   const zipCodeTitle = __("Zip code");
   const phoneNumberTitle = __("Phone");
@@ -278,7 +277,7 @@ const CheckoutRightBilling = ({ order }) => {
                 onInputChange={handleBillingLastName}
                 active={customer && !delivery}
                 backGroundColor={backGroundColor}
-                autoComplete="name"
+                autoComplete="name-family"
                 keyboardType="default"
               />
             </View>
@@ -312,7 +311,7 @@ const CheckoutRightBilling = ({ order }) => {
             onInputChange={handleBillingCity}
             active={customer && !delivery}
             backGroundColor={backGroundColor}
-            autoComplete="name"
+            autoComplete="postal-address-locality"
             keyboardType="default"
           />
 
@@ -336,7 +335,7 @@ const CheckoutRightBilling = ({ order }) => {
                 onInputChange={handleBillingProvince}
                 active={customer && !delivery}
                 backGroundColor={backGroundColor}
-                autoComplete="name"
+                autoComplete="postal-address-region"
                 keyboardType="default"
               />
             </View>
@@ -357,7 +356,7 @@ const CheckoutRightBilling = ({ order }) => {
                 onInputChange={handleBillingZipCode}
                 active={customer && !delivery}
                 backGroundColor={backGroundColor}
-                autoComplete="street-address"
+                autoComplete="postal-code"
                 keyboardType="default"
               />
             </View>
@@ -471,7 +470,7 @@ const CheckoutRightBilling = ({ order }) => {
                     onInputChange={handleDeliveryCity}
                     active={customer && !delivery}
                     backGroundColor={backGroundColor}
-                    autoComplete="name"
+                    autoComplete="postal-address-locality"
                     keyboardType="default"
                   />
 
@@ -488,7 +487,7 @@ const CheckoutRightBilling = ({ order }) => {
                         onInputChange={handleDeliveryProvince}
                         active={customer && !delivery}
                         backGroundColor={backGroundColor}
-                        autoComplete="name"
+                        autoComplete="postal-address-region"
                         keyboardType="default"
                       />
                     </View>
@@ -509,7 +508,7 @@ const CheckoutRightBilling = ({ order }) => {
                         onInputChange={handleDeliveryZipCode}
                         active={customer && !delivery}
                         backGroundColor={backGroundColor}
-                        autoComplete="street-address"
+                        autoComplete="postal-code"
                         keyboardType="default"
                       />
                     </View>
