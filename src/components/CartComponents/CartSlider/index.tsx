@@ -20,15 +20,14 @@ const CartSlider = ({ size, langPage }) => {
   const dispatch = useAppDispatch();
   const isOpen = useAppSelector((state) => state.cartSliderSlice.isOpen);
 
-  
-  console.log('currentPage ', currentPage)
+  console.log("currentPage ", currentPage);
   const isOpenSlider = () => {
     if (!isOpen) {
       dispatch(CartSliderIsOpenAction());
-      console.log('currentPage ', currentPage)
+      console.log("currentPage ", currentPage);
     } else {
       dispatch(CartSliderIsClosedAction());
-      console.log('currentPage ', currentPage)
+      console.log("currentPage ", currentPage);
     }
   };
 
@@ -51,7 +50,8 @@ const CartSlider = ({ size, langPage }) => {
                 right: isOpen ? 0 : -330,
                 top:
                   (currentPage === "shop" && isMiddle) ||
-                  (currentPage === "blog" && isMiddle)
+                  (currentPage === "blog" && isMiddle) ||
+                  (currentPage === "index" && isMiddle)
                     ? -120
                     : -60,
               },
@@ -80,7 +80,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-   
   },
   sliderContainerForCategories: {
     position: "absolute",
@@ -95,7 +94,6 @@ const styles = StyleSheet.create({
     right: -330,
     width: 330,
     height: "100%",
-    
   },
 });
 

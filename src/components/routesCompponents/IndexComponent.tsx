@@ -23,12 +23,18 @@ import {
   ANIMATION_TO_VALUE,
   ANIMATION_DURATION,
 } from "@/constants/types/backgroundAnumatedConst";
+import CartSlider from "../CartComponents/CartSlider";
+import { useWidth } from "../utils/useWidth";
 
 export default function IndexComponent({ langPage }) {
   const theme = useAppSelector((state) => state.themeSlice.theme);
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;
-
+  const isMiddle = useWidth(768);
   const dispatch = useAppDispatch();
+  
+  const iscartSliderOpen = useAppSelector(
+    (state) => state.cartSliderSlice.isOpen
+  );
 
   useEffect(() => {
     dispatch(currentPageChangeAction("index"));
@@ -60,12 +66,16 @@ export default function IndexComponent({ langPage }) {
   const source = backgroundImage as ImageURISource;
   return (
     <ScrollView>
+      
+        
       <View
         style={[
           styles.container,
           { backgroundColor: selectedTheme.backgroundSecond },
         ]}
       >
+       
+        <CartSlider size={isMiddle ? "middle" : "small"} langPage={langPage}/>
         <AnimetedImage 
             resizeMode="repeat" 
             style={[styles.background,{

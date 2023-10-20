@@ -1,19 +1,21 @@
 import {Stack } from "expo-router";
 import { __ } from "../LanguageComponents/TranslateComponent/systemTranslatre";
 
+
 export const unstable_settings = {
   initialRouteName: "index",
 };
 
 
 const LayoutHomeComponent =() =>{
+  
 const title = __("START")
 
   return (
     <Stack
+    
       screenOptions={{
-        headerShown: false,
-        title: title ,
+        headerShown: false ,
       }}
     >
       <Stack.Screen
@@ -22,6 +24,7 @@ const title = __("START")
           headerShown: false,
         }}
       />
+      
     </Stack>
   );
 }

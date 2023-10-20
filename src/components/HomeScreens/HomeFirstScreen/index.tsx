@@ -17,6 +17,7 @@ import { firstScreenTitle } from "config";
 import { useWidth } from "@/components/utils/useWidth";
 import { TabBarIcon } from "@/components/navigatorComponents/tab-bar-icon";
 import { __ } from "@/components/LanguageComponents/TranslateComponent/systemTranslatre";
+import { currentPageChangeAction } from "@/store/reducers/CurrentPageSlice";
 
 const HomeFirstScreen = () => {
   const textTitle = __("0001");
@@ -29,6 +30,7 @@ const HomeFirstScreen = () => {
 
   useEffect(() => {
     dispatch(fetchData());
+    dispatch(currentPageChangeAction("index"));
   }, []);
 
   if (!dataPosts || dataPosts.length === 0) {
@@ -78,7 +80,7 @@ const HomeFirstScreen = () => {
         />
       </View>
 
-      <View style={{ position: "absolute", top: 60, left: 175 }}>
+      <View style={{ position: "absolute", top: 60, left: 205 }}>
         <TabBarIcon
           color="#D0BFFF"
           style={[
@@ -108,14 +110,14 @@ const HomeFirstScreen = () => {
         />
       </View>
 
-      <View style={{ position: "absolute", top: 230, left: 163 }}>
+      <View style={{ position: "absolute", top: 290, left: 123 }}>
         <TabBarIcon
           color="#D2E0FB"
           style={[
             {},
             Platform.select({
               web: {
-                transform: [{ scale: 5 }, { rotate: "15deg" }],
+                transform: [{ scale: 4 }, { rotate: "15deg" }],
               },
             }),
           ]}
@@ -165,6 +167,21 @@ const HomeFirstScreen = () => {
             }),
           ]}
           name="search"
+        />
+      </View>
+
+      <View style={{ position: "absolute", top: 170, left: 210 }}>
+        <TabBarIcon
+          color="#C44C58"
+          style={[
+            {},
+            Platform.select({
+              web: {
+                transform: [{ scale: 1.3 }, { rotate: "13deg" }],
+              },
+            }),
+          ]}
+          name='sun'
         />
       </View>
     </View>
