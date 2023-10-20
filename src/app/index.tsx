@@ -3,6 +3,6 @@ import IndexComponent from "@/components/routesCompponents/IndexComponent";
 
 const IndexRoutes = () => {
   
-  return <IndexComponent />;
+  return <IndexComponent langPage={""}/>;
 };
 export default IndexRoutes;

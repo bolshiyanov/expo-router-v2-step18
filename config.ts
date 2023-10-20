@@ -73,9 +73,11 @@ export const discountData = [
 ];
 
 //In this function, you can add logic to create a new coupon
- //for a discount in percent for the next payment, and you can 
- //also add a period in days during which this coupon can be used.
+//for a discount in percent for the next payment, and you can
+//also add a period in days during which this coupon can be used.
 
-  export const discountPercent = 5;
-  export const discountPeriod = 365;
+export const discountPercent = 5;
+export const discountPeriod = 365;
 
+export const firstScreenTitle = "ROMAN";
+export const firstScreenSubTitle = "BOLSHIYANOV";

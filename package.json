@@ -8,6 +8,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
+    "@react-native-masked-view/masked-view": "0.2.9",
     "@react-native-picker/picker": "^2.5.1",
     "@reduxjs/toolkit": "^1.9.5",
     "@types/react": "~18.0.27",

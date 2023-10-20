@@ -43,13 +43,12 @@ const CategoryFirstScreen = ({ smallText }) => {
               style={[
                 styles.title,
                 {
-                  color: selectedTheme.text,
+                  color: selectedTheme.transporentButton,
                   fontSize: smallText ? 32 : 64,
-                  textShadowOffset: smallText
-                    ? { width: 2, height: 2 }
-                    : { width: 4, height: 4 },
-                  textShadowColor: selectedTheme.textShadowColor,
-                  textShadowRadius: smallText ? 3 : 4,
+                  textShadowOffset:{ width: 0, height: 0 },
+                   
+                  textShadowColor: selectedTheme.text,
+                  textShadowRadius: 7
                 },
               ]}
               numberOfLines={2}

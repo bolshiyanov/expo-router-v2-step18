@@ -958,12 +958,12 @@ export default [
   },
   {
     code: "",
-    en: "Expacted date  ",
-    ru: "...",
-    es: "...",
-    de: "...",
-    fr: "...",
-    it: "...",
+    en: "START",
+    ru: "НАЧАЛО",
+    es: "INICIO",
+    de: "START",
+    fr: "DÉMARRER",
+    it: "INIZIO",
   },
   {
     code: "",

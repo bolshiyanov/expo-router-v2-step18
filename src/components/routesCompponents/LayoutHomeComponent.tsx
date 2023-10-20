@@ -1,17 +1,19 @@
 import {Stack } from "expo-router";
+import { __ } from "../LanguageComponents/TranslateComponent/systemTranslatre";
 
 export const unstable_settings = {
   initialRouteName: "index",
 };
 
 
-export default function LayoutHomeComponent() {
+const LayoutHomeComponent =() =>{
+const title = __("START")
 
   return (
     <Stack
       screenOptions={{
         headerShown: false,
-        title: "HOME",
+        title: title ,
       }}
     >
       <Stack.Screen
@@ -23,3 +25,5 @@ export default function LayoutHomeComponent() {
     </Stack>
   );
 }
+
+export default LayoutHomeComponent

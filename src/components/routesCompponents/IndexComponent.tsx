@@ -5,10 +5,10 @@ import { ScrollView } from "react-native-gesture-handler";
 import FooterComponent from "@/components/FooterComponent";
 import { useEffect } from "react";
 import { currentPageChangeAction } from "@/store/reducers/CurrentPageSlice";
+import HomeFirstScreen from "../HomeScreens/HomeFirstScreen";
 
-export default function IndexComponent() {
+export default function IndexComponent({langPage}) {
   const theme = useAppSelector((state) => state.themeSlice.theme);
-
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;
 
   const dispatch = useAppDispatch();
@@ -22,16 +22,12 @@ export default function IndexComponent() {
       <View
         style={[
           styles.container,
-          { backgroundColor: selectedTheme.background },
+          { backgroundColor: selectedTheme.backgroundSecond },
         ]}
       >
         <View style={styles.main}>
-          <Text style={[styles.title, { color: selectedTheme.text }]}>
-            CASA
-          </Text>
-          <Text style={[styles.subtitle, { color: selectedTheme.tint }]}>
-            Va a Explore pagina web
-          </Text>
+          <HomeFirstScreen/>
+          
         </View>
         
       </View>
@@ -44,12 +40,11 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    padding: 24,
   },
   main: {
     flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
+    justifyContent: 'flex-start',
+    width:'100%',
     
     marginHorizontal: "auto",
   },
