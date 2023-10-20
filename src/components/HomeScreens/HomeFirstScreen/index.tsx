@@ -16,8 +16,10 @@ import baner from "@/assets/images/banner-3.jpg";
 import { firstScreenTitle } from "config";
 import { useWidth } from "@/components/utils/useWidth";
 import { TabBarIcon } from "@/components/navigatorComponents/tab-bar-icon";
+import { __ } from "@/components/LanguageComponents/TranslateComponent/systemTranslatre";
 
 const HomeFirstScreen = () => {
+  const textTitle = __("0001");
   const isMiddle = useWidth(768);
   const theme = useAppSelector((state) => state.themeSlice.theme);
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;
@@ -48,21 +50,22 @@ const HomeFirstScreen = () => {
   return (
     <View style={styles.container}>
       <Image
-        source={require("@/assets/images/banner-3.png")}
+        source={require("@/assets/images/banner-4.png")}
         style={styles.image}
       />
       <View style={[styles.overlay]}>
         <Text style={[styles.title, { fontSize: isMiddle ? 90 : 50 }]}>
           {firstScreenTitle}
         </Text>
-        <Text style={[styles.subTitle, { fontSize: isMiddle ? 90 : 50 }]}>
+        <Text style={[styles.subTitle, { fontSize: isMiddle ? 90 : 47 }]}>
           {firstScreenSubTitle}
         </Text>
+        
       </View>
 
       <View style={{ position: "absolute", top: 20, left: 20 }}>
         <TabBarIcon
-          color="#FAF8ED"
+          color="#BCA37F"
           style={[
             {},
             Platform.select({
@@ -152,7 +155,7 @@ const HomeFirstScreen = () => {
 
       <View style={{ position: "absolute", top: 110, left: 90 }}>
         <TabBarIcon
-          color="#BCA37F"
+          color="#CD5C08"
           style={[
             {},
             Platform.select({
@@ -198,7 +201,7 @@ const styles = StyleSheet.create({
     textShadowColor: "black",
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 7,
-    marginBottom: -24,
+    marginBottom: -12,
   },
   subTitle: {
     fontSize: 100,
@@ -207,6 +210,16 @@ const styles = StyleSheet.create({
     textShadowColor: "white",
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 7,
+  },
+  text: {
+    position: "absolute",
+    width: "100%",
+    maxWidth: 800,
+    padding: 12,
+    bottom: 24,
+
+    justifyContent: "center",
+    alignItems: "center",
   },
 });
 
