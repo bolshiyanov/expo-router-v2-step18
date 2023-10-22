@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react"; // Import 'useState'
 import { useAppSelector, useAppDispatch } from "@/components/utils/hooks/redux";
 import Colors from "config";
 import { cartAdd } from "@/store/reducers/CartSlice";
-import { useWidth } from "@/components/utils/useWidth";
 import { __ } from "@/components/LanguageComponents/TranslateComponent/systemTranslatre";
 import { currentPageChangeAction } from "@/store/reducers/CurrentPageSlice";
 import { cns } from "@/components/utils/cns";
@@ -13,7 +12,7 @@ const isItemInCart = (cart, itemId) => {
   return cart.some((cartItem) => cartItem.id === itemId);
 };
 
-const AddToCartButton = ({ id, name, image, price }) => {
+const AddToCartButton = ({ id, name, image, price,size}) => {
   const addToCart = __("Add to the cart");
   const notAvailable = __("Not available");
   const AddedToCartText = __("Already added to the cart");
@@ -25,7 +24,6 @@ const AddToCartButton = ({ id, name, image, price }) => {
     (state) => state.availableInStock
   );
   const item = availableInStockData.find((item) => item.id === id);
-  const isMiddle = useWidth(768);
 
   const [itemInCart, setItemInCart] = useState(false);
 
@@ -84,9 +82,9 @@ const AddToCartButton = ({ id, name, image, price }) => {
                   styles.button,
                   {
                     color: selectedTheme.text,
-                    fontSize: isMiddle ? 16 : 12,
-                    width: isMiddle ? 220 : 140,
-                    height: isMiddle ? 50 : 38,
+                    fontSize: size === 'middle' ? 16 : 10,
+                    width: size === 'middle' ? 220 : 140,
+                    height: size === 'middle' ? 50 : 38,
                     backgroundColor: selectedTheme.backgroundSecond,
                     borderColor: selectedTheme.backgroundNav,
                   },
@@ -130,9 +128,9 @@ const AddToCartButton = ({ id, name, image, price }) => {
                   styles.button,
                   {
                     color: selectedTheme.tint,
-                    fontSize: isMiddle ? 12 : 8,
-                    width: isMiddle ? 220 : 140,
-                    height: isMiddle ? 50 : 38,
+                    fontSize: size === 'middle' ? 12 : 8,
+                    width: size === 'middle' ? 220 : 140,
+                    height: size === 'middle' ? 50 : 38,
                     backgroundColor: selectedTheme.backgroundSecond,
                     borderColor: selectedTheme.backgroundNav,
                   },

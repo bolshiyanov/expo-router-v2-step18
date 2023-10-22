@@ -8,6 +8,7 @@ import { cartAllRemove, fetchCartData } from "@/store/reducers/CartSlice";
 import { CartSliderIsClosedAction } from "@/store/reducers/CartSlider";
 import { __ } from "@/components/LanguageComponents/TranslateComponent/systemTranslatre";
 import { currentPageChangeAction } from "@/store/reducers/CurrentPageSlice";
+import { useWidth } from "@/components/utils/useWidth";
 
 const CartHeader = () => {
   const theme = useAppSelector((state) => state.themeSlice.theme);
@@ -16,6 +17,7 @@ const CartHeader = () => {
     (state) => state.currentPageSlice.currentPage
   );
   const shoppingCart = __("My shoping bag");
+  const isMiddle = useWidth(768);
   const router = useRouter();
   const dispatch = useAppDispatch();
   const removeAllCart = () => {
@@ -46,7 +48,7 @@ const CartHeader = () => {
         </Text>
       </View>
 
-      {/* {currentPage !== "index" && (
+      {isMiddle && (
         <Pressable onPress={removeAllCart}>
           {({ pressed, hovered }) => (
             <TabBarIcon
@@ -67,7 +69,7 @@ const CartHeader = () => {
             />
           )}
         </Pressable>
-      )} */}
+      )} 
     </View>
   );
 };

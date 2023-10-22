@@ -125,6 +125,7 @@ const ShopMeddleCardScreen: React.FC<RenderItemProps> = ({
                   name={transformLanguageData("name", langPage, item)}
                   image={item.image}
                   price= {item.price}
+                  size="middle"
                 />
               
             </View>

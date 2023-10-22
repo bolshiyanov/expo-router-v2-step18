@@ -211,6 +211,7 @@ const BlogPagesComponent = ({ langPage }) => {
                           name={transformLanguageData("name", langPage, item)}
                           image={item.image}
                           price={item.price}
+                          size="middle"
                         />
                       </View>
                     </View>
@@ -300,6 +301,7 @@ const BlogPagesComponent = ({ langPage }) => {
                               )}
                               image={item.image}
                               price={item.price}
+                              size="middle"
                             />
                           </View>
                         </View>

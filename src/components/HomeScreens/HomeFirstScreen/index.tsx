@@ -66,7 +66,7 @@ const HomeFirstScreen = () => {
           ]}
           name="briefcase"
         />
-        <Text style={{ color: selectedTheme.check, fontWeight: '800', fontSize: 20, paddingLeft: 12}}>{ILookAJobTitle}</Text>
+        <Text style={{ color: selectedTheme.check, fontWeight: '800', fontSize: 18, paddingLeft: 12}}>{ILookAJobTitle}</Text>
       </View>
       <Image
         source={require("@/assets/images/banner-4.png")}
