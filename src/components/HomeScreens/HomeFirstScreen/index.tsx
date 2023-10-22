@@ -12,7 +12,6 @@ import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/components/utils/hooks/redux";
 
 import { fetchData } from "@/store/reducers/PostsDataSlice";
-import baner from "@/assets/images/banner-3.jpg";
 
 import { useWidth } from "@/components/utils/useWidth";
 import { TabBarIcon } from "@/components/navigatorComponents/tab-bar-icon";
@@ -24,9 +23,8 @@ import FirstScreenButton from "../FirstScreenButton";
 const HomeFirstScreen = () => {
   const textTitle = __("0001");
   const ILookAJobTitle = __("I look a job");
-  const firstScreenTitle = "Expo, like you've never seen it before";
-  const firstScreenSubTitle =
-    "Craft Stunning Static Websites, Stores, and Blogs for Google Search Excellence with React-Native Expo";
+  const firstScreenTitle = __("Expo, like you've never seen it before");
+  const firstScreenSubTitle =__("Craft Stunning Static Websites, Stores, and Blogs for Google Search Excellence with React-Native Expo");
   const isMiddle = useWidth(768);
   const theme = useAppSelector((state) => state.themeSlice.theme);
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;

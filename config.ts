@@ -79,5 +79,4 @@ export const discountData = [
 export const discountPercent = 5;
 export const discountPeriod = 365;
 
-export const firstScreenTitle = "ROMAN";
-export const firstScreenSubTitle = "BOLSHIYANOV";
+
