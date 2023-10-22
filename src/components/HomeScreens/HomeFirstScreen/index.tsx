@@ -55,7 +55,7 @@ const HomeFirstScreen = () => {
 
   return (
     <View style={[styles.container]}>
-      <ImageBackground
+      <ImageBackground 
         source={require("@/assets/images/backgroundClouds.webp")}
         style={[styles.image, { zIndex: 1 }]}
       />
@@ -77,7 +77,7 @@ const HomeFirstScreen = () => {
       </View>
 
       <View style={styles.contentContainer}>
-        <View style={styles.textContentContainer}>
+        <View style={[styles.textContentContainer, {width: isMiddle? "54%" : 250,}]}>
           <View style={[styles.lookJob, {}]}>
             <TabBarIcon
               color="#caccce"
@@ -182,17 +182,17 @@ const styles = StyleSheet.create({
   },
   contentContainer: {
     flex: 1,
+    width: '100%',
     justifyContent: "space-between",
     alignItems: "flex-start",
     position: "absolute",
-    top: 64,
+    top: 32,
     left: 24,
     zIndex: 2,
-    height: 500
+    height: 540
   },
   textContentContainer: {
     flex: 1,
-    width: "54%",
     alignItems: "flex-start",
     justifyContent: "flex-start",
   },

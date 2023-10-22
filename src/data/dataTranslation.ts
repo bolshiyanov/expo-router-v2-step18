@@ -985,12 +985,12 @@ export default [
   },
   {
     code: "",
-    en: "Expacted date  ",
-    ru: "...",
-    es: "...",
-    de: "...",
-    fr: "...",
-    it: "...",
+    en: "Contact",
+    ru: "Контакт",
+    es: "Contacto",
+    de: "Kontakt",
+    fr: "Contact",
+    it: "Contatto"
   },
   {
     code: "",
