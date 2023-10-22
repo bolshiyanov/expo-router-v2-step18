@@ -976,12 +976,12 @@ export default [
   },
   {
     code: "",
-    en: "Expacted date  ",
-    ru: "...",
-    es: "...",
-    de: "...",
-    fr: "...",
-    it: "...",
+    en: "I look a job",
+    ru: "Ищу работу",
+    es: "Busco un trabajo",
+    de: "Ich suche einen Job",
+    fr: "Je cherche un emploi",
+    it: "Cerco un lavoro",
   },
   {
     code: "",

@@ -43,7 +43,8 @@ export type IconName =
   | "trash-middle"
   | "calculator"
   | "wallet"
-  | "check";
+  | "check"
+  | "briefcase";
 
 export function Icon({
   name,

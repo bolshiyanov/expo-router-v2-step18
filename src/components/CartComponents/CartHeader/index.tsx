@@ -46,7 +46,7 @@ const CartHeader = () => {
         </Text>
       </View>
 
-      {currentPage !== "index" && (
+      {/* {currentPage !== "index" && (
         <Pressable onPress={removeAllCart}>
           {({ pressed, hovered }) => (
             <TabBarIcon
@@ -67,7 +67,7 @@ const CartHeader = () => {
             />
           )}
         </Pressable>
-      )}
+      )} */}
     </View>
   );
 };

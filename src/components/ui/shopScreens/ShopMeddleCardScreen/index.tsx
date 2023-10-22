@@ -94,18 +94,7 @@ const ShopMeddleCardScreen: React.FC<RenderItemProps> = ({
             </Pressable>
           </Link>
 
-          <View style={styles.bottomContentContainer}>
-            <View style={styles.buttonContainer}>
-              
-                <AddToCartButton                  
-                  id={item.id}
-                  name={transformLanguageData("name", langPage, item)}
-                  image={item.image}
-                  price= {item.price}
-                />
-              
-            </View>
-            <View style={styles.priceContainer}>
+          <View style={styles.priceContainer}>
               {item.price > 0 && (
                 <>
                   <Text
@@ -126,7 +115,20 @@ const ShopMeddleCardScreen: React.FC<RenderItemProps> = ({
                   </Text>
                 </>
               )}
+            </View> 
+
+          <View style={styles.bottomContentContainer}>
+            <View style={styles.buttonContainer}>
+              
+                <AddToCartButton                  
+                  id={item.id}
+                  name={transformLanguageData("name", langPage, item)}
+                  image={item.image}
+                  price= {item.price}
+                />
+              
             </View>
+            
           </View>
         </View>
         {item.offer !== "" && (
@@ -164,7 +166,7 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: "100%",
     maxWidth: 270,
-    height: 330,
+    height: 374,
     marginHorizontal: 4,
     paddingHorizontal: 4,
     marginBottom: 100,
@@ -230,8 +232,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flexWrap: "nowrap",
     alignItems: "center",
-    justifyContent: "flex-start",
-    width: "50%",
+    justifyContent: 'center',
+    width: '100%',
+    paddingVertical: 8,
+    paddingHorizontal: 6
   },
 
   priceContainer: {
@@ -239,8 +243,6 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
-    width: "40%",
-    minWidth: "40%",
     marginRight: 12,
   },
   number: {

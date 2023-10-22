@@ -69,14 +69,13 @@ export default function IndexComponent({ langPage }) {
       
         
       <View
-        style={[
-          styles.container,
-          { backgroundColor: selectedTheme.backgroundSecond },
-        ]}
-      >
+  style={[
+    styles.container,
+  ]}
+>
        
         <CartSlider size={isMiddle ? "middle" : "small"} langPage={langPage}/>
-        <AnimetedImage 
+        {/* <AnimetedImage 
             resizeMode="repeat" 
             style={[styles.background,{
                 transform: [
@@ -88,7 +87,7 @@ export default function IndexComponent({ langPage }) {
                     },
                   ],
             }]}
-            source={source} />
+            source={source} /> */}
         <View style={styles.main}>
           <HomeFirstScreen />
         </View>
@@ -123,7 +122,7 @@ const styles = StyleSheet.create({
     width: 1920,
     height: 1920,
     top: 0,
-    opacity: 0.2,
+    opacity: 0.7,
     transform: [
       {
         translateX: 0,

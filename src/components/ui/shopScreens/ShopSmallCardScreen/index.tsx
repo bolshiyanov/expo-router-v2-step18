@@ -14,20 +14,22 @@ interface RenderItemProps {
   item: DataShopTypeInterface;
 }
 
-const ShopSmallCardScreen: React.FC<RenderItemProps> = ({ langPage, item }) => {
+const ShopMeddleCardScreen: React.FC<RenderItemProps> = ({
+  langPage,
+  item,
+}) => {
   const theme = useAppSelector((state) => state.themeSlice.theme);
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;
   const isProduction = process.env.NODE_ENV === "production";
 
-  const [addedToTheCart, setAddedToTheCart] = useState(false);
   const sortType = useAppSelector((state) => state.sortTypeSlice.sortType);
   let typeSort = "";
   if (sortType === "publishDateNew" || sortType === "publishDateOld") {
     typeSort = "dateCreate";
   }
 
-  if (sortType === "totalReadsLot" || sortType === "totalReadsLittle") {
-    typeSort = "totalReads";
+  if (sortType === "priceLot" || sortType === "priceLittle") {
+    typeSort = "price";
   }
 
   if (sortType === "likesLot" || sortType === "likesLittle") {
@@ -36,6 +38,7 @@ const ShopSmallCardScreen: React.FC<RenderItemProps> = ({ langPage, item }) => {
 
   const bottonText = __("Add");
   const AddedToCartText = __("Already added to the cart");
+
   return (
     <>
       <View
@@ -77,9 +80,7 @@ const ShopSmallCardScreen: React.FC<RenderItemProps> = ({ langPage, item }) => {
                       },
                     ]}
                   />
-
                   <Text
-                    numberOfLines={4}
                     ellipsizeMode="tail"
                     style={[
                       styles.description,
@@ -92,22 +93,10 @@ const ShopSmallCardScreen: React.FC<RenderItemProps> = ({ langPage, item }) => {
               </View>
             </Pressable>
           </Link>
-
-          <View style={styles.bottomContentContainer}>
-            <View style={styles.buttonContainer}>
-              <AddToCartButton
-                id={item.id}
-                name={transformLanguageData("name", langPage, item)}
-                image={item.image}
-                price={item.price}
-              />
-            </View>
-            <View style={styles.priceContainer}>
+          <View style={styles.priceContainer}>
               {item.price > 0 && (
                 <>
                   <Text
-                    numberOfLines={1}
-                    ellipsizeMode="tail"
                     style={[
                       styles.number,
                       { color: selectedTheme.borderBottomLine },
@@ -115,7 +104,7 @@ const ShopSmallCardScreen: React.FC<RenderItemProps> = ({ langPage, item }) => {
                   >
                     {currency}
                   </Text>
-                  <Text
+                  <Text numberOfLines={1} ellipsizeMode='tail'
                     style={[
                       styles.number,
                       { color: selectedTheme.borderBottomLine },
@@ -126,6 +115,19 @@ const ShopSmallCardScreen: React.FC<RenderItemProps> = ({ langPage, item }) => {
                 </>
               )}
             </View>
+
+          <View style={styles.bottomContentContainer}>
+            <View style={styles.buttonContainer}>
+              
+                <AddToCartButton                  
+                  id={item.id}
+                  name={transformLanguageData("name", langPage, item)}
+                  image={item.image}
+                  price= {item.price}
+                />
+              
+            </View>
+              
           </View>
         </View>
         {item.offer !== "" && (
@@ -163,52 +165,46 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     width: "100%",
     maxWidth: 185,
-    height: 225,
-    marginHorizontal: 2,
-    paddingHorizontal: 2,
-    marginBottom: 80,
+    height: 280,
+    marginHorizontal: 4,
+    paddingHorizontal: 4,
+    marginBottom: 100,
   },
   image: {
     aspectRatio: 1,
     width: "90%",
-    marginTop: -70,
+    marginTop: -90,
   },
   contentContainer: {
     display: "flex",
-    flexDirection: "column",
-    flexWrap: "nowrap",
-    justifyContent: "center",
-    alignItems: "flex-start",
-    padding: 6,
-    height: 128,
+    height: 183,
+
+    padding: 12,
     width: "100%",
-    overflow: "hidden",
   },
+
   topContentContainer: {
     width: "100%",
     overflow: "hidden",
-    height: 80,
-    minHeight: 70,
-    marginVertical: 6,
+    height: 110,
+    minHeight: 110,
+    marginBottom: 6,
   },
   titleContainer: {
     width: "100%",
     overflow: "hidden",
-    marginBottom: 4,
+    marginBottom: 12,
   },
   title: {
     fontWeight: "600",
-    fontSize: 18,
-    lineHeight: 18,
+    fontSize: 24,
+    lineHeight: 22,
   },
   descriptionContainer: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "flex-start",
-    alignItems: "flex-start",
+    flex: 1,
     width: "100%",
     overflow: "hidden",
-    borderLeftWidth: 3,
+    borderLeftWidth: 5,
     position: "relative",
   },
   gradientOverlay: {
@@ -217,9 +213,9 @@ const styles = StyleSheet.create({
   },
   description: {
     width: "100%",
-    fontSize: 12,
-    paddingLeft: 4,
-    lineHeight: 12,
+    fontSize: 16,
+    paddingLeft: 6,
+    lineHeight: 18,
   },
   bottomContentContainer: {
     display: "flex",
@@ -229,55 +225,49 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     width: "100%",
     overflow: "hidden",
-    height: 30,
-    minHeight: 30,
   },
   buttonContainer: {
-    flex: 1,
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    alignItems: "center",
+    justifyContent: 'center',
+    width: '100%',
+    paddingVertical: 8,
+    paddingHorizontal: 6
   },
-  button: {
-    fontSize: 11,
-    fontWeight: "600",
-    padding: 5,
-    paddingBottom: 8,
-    borderRadius: 8,
-    borderWidth: 1,
-    textAlign: "center",
-  },
+
   priceContainer: {
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "flex-end",
-    width: "37%",
-    minWidth: "37%",
-    marginRight: 4,
+    marginRight: 12,
   },
   number: {
-    fontSize: 12,
-    fontWeight: "600",
-    padding: 1,
+    fontSize: 21,
+    padding: 2,
   },
   offerContentContainer: {
     flex: 1,
     position: "absolute",
     justifyContent: "center",
-    top: -60,
-    left: 18,
-    borderRadius: 18,
+    top: -80,
+    left: 30,
+    borderRadius: 25,
     backgroundColor: "red",
   },
   offer: {
     fontWeight: "800",
     color: "white",
-    fontSize: 11,
-    padding: 4,
-    paddingBottom: 5,
+    fontSize: 18,
+    padding: 6,
+    paddingBottom: 8,
   },
   numberContainer: {
     position: "absolute",
-    right: 18,
-    top: -56,
+    right: 30,
+    top: -73,
     padding: 3,
     borderRadius: 8,
     minWidth: 24,
@@ -286,10 +276,10 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
   transformDate: {
-    fontSize: 10,
+    fontSize: 12,
     textAlign: "center",
     fontWeight: "600",
   },
 });
 
-export default React.memo(ShopSmallCardScreen);
+export default React.memo(ShopMeddleCardScreen);

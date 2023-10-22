@@ -21,6 +21,7 @@ import { currentPageChangeAction } from "@/store/reducers/CurrentPageSlice";
 
 const HomeFirstScreen = () => {
   const textTitle = __("0001");
+  const ILookAJobTitle = __("I look a job")
   const isMiddle = useWidth(768);
   const theme = useAppSelector((state) => state.themeSlice.theme);
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;
@@ -47,14 +48,31 @@ const HomeFirstScreen = () => {
 
   const imageOfItemWithMaxReads = itemWithMaxReads.image;
 
-  console.log(" baner HomeFirstScreen", baner);
-
   return (
-    <View style={styles.container}>
+    <View style={[styles.container]}>
+      <ImageBackground
+        source={require("@/assets/images/backgrondBase.jpg")}
+        style={[styles.image,{zIndex: 1}]}
+      />
+      <View style={[styles.lookJob, { zIndex: 2 }]}>
+        <TabBarIcon
+          color={selectedTheme.check}
+          style={[
+            Platform.select({
+              web: {
+                transform: [{ scale: 1.1 }],
+              },
+            }),
+          ]}
+          name="briefcase"
+        />
+        <Text style={{ color: selectedTheme.check, fontWeight: '800', fontSize: 20, paddingLeft: 12}}>{ILookAJobTitle}</Text>
+      </View>
       <Image
         source={require("@/assets/images/banner-4.png")}
-        style={styles.image}
+        style={styles.imageBackground}
       />
+      
       <View style={[styles.overlay]}>
         <Text style={[styles.title, { fontSize: isMiddle ? 90 : 50 }]}>
           {firstScreenTitle}
@@ -62,127 +80,6 @@ const HomeFirstScreen = () => {
         <Text style={[styles.subTitle, { fontSize: isMiddle ? 90 : 47 }]}>
           {firstScreenSubTitle}
         </Text>
-        
-      </View>
-
-      <View style={{ position: "absolute", top: 20, left: 20 }}>
-        <TabBarIcon
-          color="#BCA37F"
-          style={[
-            {},
-            Platform.select({
-              web: {
-                transform: [{ scale: 6 }, { rotate: "45deg" }],
-              },
-            }),
-          ]}
-          name="cart"
-        />
-      </View>
-
-      <View style={{ position: "absolute", top: 60, left: 205 }}>
-        <TabBarIcon
-          color="#D0BFFF"
-          style={[
-            {},
-            Platform.select({
-              web: {
-                transform: [{ rotate: "-5deg" }],
-              },
-            }),
-          ]}
-          name="logo"
-        />
-      </View>
-
-      <View style={{ position: "absolute", top: 190, left: 33 }}>
-        <TabBarIcon
-          color="#B0D9B1"
-          style={[
-            {},
-            Platform.select({
-              web: {
-                transform: [{ scale: 3 }, { rotate: "-15deg" }],
-              },
-            }),
-          ]}
-          name="more"
-        />
-      </View>
-
-      <View style={{ position: "absolute", top: 290, left: 123 }}>
-        <TabBarIcon
-          color="#D2E0FB"
-          style={[
-            {},
-            Platform.select({
-              web: {
-                transform: [{ scale: 4 }, { rotate: "15deg" }],
-              },
-            }),
-          ]}
-          name="explore"
-        />
-      </View>
-
-      <View style={{ position: "absolute", top: 130, left: 163 }}>
-        <TabBarIcon
-          color="#D988B9"
-          style={[
-            {},
-            Platform.select({
-              web: {
-                transform: [{ scale: 2.5 }, { rotate: "13deg" }],
-              },
-            }),
-          ]}
-          name="facebook"
-        />
-      </View>
-
-      <View style={{ position: "absolute", top: 130, left: 283 }}>
-        <TabBarIcon
-          color="#1F4172"
-          style={[
-            {},
-            Platform.select({
-              web: {
-                transform: [{ scale: 1.2 }, { rotate: "13deg" }],
-              },
-            }),
-          ]}
-          name="home"
-        />
-      </View>
-
-      <View style={{ position: "absolute", top: 110, left: 90 }}>
-        <TabBarIcon
-          color="#CD5C08"
-          style={[
-            {},
-            Platform.select({
-              web: {
-                transform: [{ scale: 1.7 }, { rotate: "13deg" }],
-              },
-            }),
-          ]}
-          name="search"
-        />
-      </View>
-
-      <View style={{ position: "absolute", top: 170, left: 210 }}>
-        <TabBarIcon
-          color="#C44C58"
-          style={[
-            {},
-            Platform.select({
-              web: {
-                transform: [{ scale: 1.3 }, { rotate: "13deg" }],
-              },
-            }),
-          ]}
-          name='sun'
-        />
       </View>
     </View>
   );
@@ -197,19 +94,29 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  image: {
+  imageBackground: {
     width: "100%",
     height: 600,
     alignSelf: "center",
     resizeMode: "cover",
     zIndex: 1,
+    position: "absolute",
+    top: 0,
+    left: 0,
+  },
+  image: {
+    width: "100%",
+    height: 600,
+    alignSelf: "center",
+    resizeMode: "cover",
+    zIndex: 2,
   },
   overlay: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: "center",
     alignItems: "center",
     flex: 1,
-    zIndex: 2,
+    zIndex: 3,
   },
   title: {
     fontSize: 100,
@@ -238,6 +145,13 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  lookJob: {
+    position: 'absolute',
+    top : 12,
+    left: 12,
+    flexDirection: 'row',
+    justifyContent: 'flex-start'
+  }
 });
 
 export default HomeFirstScreen;

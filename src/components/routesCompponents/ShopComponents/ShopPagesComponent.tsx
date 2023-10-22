@@ -160,10 +160,12 @@ const BlogPagesComponent = ({ langPage }) => {
                   <View style={{ height: 12 }} />
                   <AddToShopComponent id={item.id} />
                   <TotalPurchased id={item.id} />
+
                   <AddedToTheCartComponent
                     id={item.id}
                     onClick={addedToTheCart}
                   />
+
                   <InStockComponent id={item.id} />
                 </View>
                 {item.descriptionsEn && (
@@ -194,15 +196,25 @@ const BlogPagesComponent = ({ langPage }) => {
                         </Text>
                       </TouchableOpacity>
                     )}
+                    <View
+                      style={{
+                        display: "flex",
+                        width: "100%",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        height: 60,
+                      }}
+                    >
+                      <View style={styles.buttonContainer}>
+                        <AddToCartButton
+                          id={item.id}
+                          name={transformLanguageData("name", langPage, item)}
+                          image={item.image}
+                          price={item.price}
+                        />
+                      </View>
+                    </View>
 
-                   
-                    <AddToCartButton
-                        id={item.id}
-                        name={transformLanguageData("name", langPage, item)}
-                        image={item.image}
-                        price= {item.price}
-                      />
-                    
                     <View style={{ height: 24 }} />
                     {openFullContent && (
                       <>
@@ -269,15 +281,29 @@ const BlogPagesComponent = ({ langPage }) => {
                             item
                           )}
                         </Text>
+                        <View
+                          style={{
+                            display: "flex",
+                            width: "100%",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            height: 60,
+                          }}
+                        >
+                          <View style={styles.buttonContainer}>
+                            <AddToCartButton
+                              id={item.id}
+                              name={transformLanguageData(
+                                "name",
+                                langPage,
+                                item
+                              )}
+                              image={item.image}
+                              price={item.price}
+                            />
+                          </View>
+                        </View>
 
-                        
-                          <AddToCartButton
-                            id={item.id}
-                            name={transformLanguageData("name", langPage, item)}
-                            image={item.image}
-                            price= {item.price}
-                          />
-                        
                         <View style={{ height: 24 }} />
                       </>
                     )}
@@ -399,6 +425,16 @@ const styles = StyleSheet.create({
     fontSize: 28,
     padding: 2,
     fontWeight: "600",
+  },
+  buttonContainer: {
+    display: "flex",
+    flexDirection: "row",
+    flexWrap: "nowrap",
+    alignItems: "center",
+    justifyContent: "center",
+    width: "100%",
+    paddingVertical: 8,
+    paddingHorizontal: 6,
   },
 });
 

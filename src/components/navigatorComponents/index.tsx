@@ -32,7 +32,7 @@ export function ResponsiveNavigator() {
             default: {
               flexDirection: isRowLayout ? "row" : "column",
             },
-            web: cns(cssStyles.container),
+            web: cns(cssStyles.container), 
           }),
         ]}
       >

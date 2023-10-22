@@ -1,4 +1,4 @@
-import { StyleSheet, Text, Pressable, Platform } from "react-native";
+import { StyleSheet, Text, Pressable, Platform, View } from "react-native";
 import React, { useEffect, useState } from "react"; // Import 'useState'
 import { useAppSelector, useAppDispatch } from "@/components/utils/hooks/redux";
 import Colors from "config";
@@ -6,6 +6,8 @@ import { cartAdd } from "@/store/reducers/CartSlice";
 import { useWidth } from "@/components/utils/useWidth";
 import { __ } from "@/components/LanguageComponents/TranslateComponent/systemTranslatre";
 import { currentPageChangeAction } from "@/store/reducers/CurrentPageSlice";
+import { cns } from "@/components/utils/cns";
+import cssStyles from "@/components/navigatorComponents/root-layout.module.scss";
 
 const isItemInCart = (cart, itemId) => {
   return cart.some((cartItem) => cartItem.id === itemId);
@@ -30,7 +32,7 @@ const AddToCartButton = ({ id, name, image, price }) => {
   useEffect(() => {
     const itemInCart = isItemInCart(cart, id);
     setItemInCart(itemInCart);
-    }, [cart, id]);
+  }, [cart, id]);
 
   const dispatch = useAppDispatch();
 
@@ -44,52 +46,103 @@ const AddToCartButton = ({ id, name, image, price }) => {
     if (item.available > 0) {
       dispatch(cartAdd({ id: item.id, name, image, price }));
       dispatch(currentPageChangeAction("shop"));
-      
     }
   };
 
   return (
     <>
       {!itemInCart ? (
-        <Pressable style={styles.buttonContainer} onPress={addToCartEvent}>
-          {({ pressed, hovered }) => (
-            <Text
-              numberOfLines={1}
-              ellipsizeMode="tail"
-              style={[
-                Platform.select({
-                  web: {
-                    transform: hovered ? [{ scale: 1.03 }] : [{ scale: 1 }],
-                    transition: "transform 0.5s",
-                    boxShadow: pressed
-                      ? "0px 0px 10px rgba(0, 0, 0, 0.4)" // Shadow on press
-                      : "none", // No shadow when not pressed
+        <View style={{ maxWidth: 220 }}>
+          <Pressable
+            style={[
+              Platform.select({
+                web: cns(cssStyles.glowOnHover),
+              }),
+            ]}
+            onPress={addToCartEvent}
+          >
+            {({ pressed, hovered }) => (
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={[
+                  Platform.select({
+                    web: {
+                      transform: [
+                        { scale: hovered ? 1.03 : 1 },
+                        { scale: pressed ? 0.95 : 1 },
+                      ],
+                      transition: "transform 0.5s",
+                      boxShadow: pressed
+                        ? "0px 0px 10px rgba(0, 0, 0, 0.4)" // Shadow on press
+                        : "none", // No shadow when not pressed
+                    },
+                    android: {
+                      elevation: pressed ? 6 : 0, // Elevation on press
+                    },
+                  }),
+                  styles.button,
+                  {
+                    color: selectedTheme.text,
+                    fontSize: isMiddle ? 16 : 12,
+                    width: isMiddle ? 220 : 140,
+                    height: isMiddle ? 50 : 38,
+                    backgroundColor: selectedTheme.backgroundSecond,
+                    borderColor: selectedTheme.backgroundNav,
                   },
-                  android: {
-                    elevation: pressed ? 6 : 0, // Elevation on press
-                  },
-                }),
-                styles.button,
-                {
-                  color: item.available > 0 ? selectedTheme.tint : "red",
-                  borderColor:
-                    item.available > 0 ? selectedTheme.borderLine : "red",
-                  fontSize: isMiddle ? 16 : 13,
-                },
-              ]}
-            >
-              {item.available > 0 ? addToCart : notAvailable}
-            </Text>
-          )}
-        </Pressable>
+                ]}
+              >
+                {item.available > 0 ? addToCart : notAvailable}
+              </Text>
+            )}
+          </Pressable>
+        </View>
       ) : (
-        <Text
-          numberOfLines={1}
-          ellipsizeMode="tail"
-          style={{ color: selectedTheme.borderBottomLine, marginLeft: 16 }}
-        >
-          {AddedToCartText}
-        </Text>
+        <View style={{ maxWidth: 220 }}>
+          <Pressable
+            style={[
+              Platform.select({
+                web: cns(cssStyles.glowOnHover),
+              }),
+            ]}
+            onPress={() => {}}
+          >
+            {({ pressed, hovered }) => (
+              <Text
+                numberOfLines={1}
+                ellipsizeMode="tail"
+                style={[
+                  Platform.select({
+                    web: {
+                      transform: [
+                        { scale: hovered ? 1.03 : 1 },
+                        { scale: pressed ? 0.95 : 1 },
+                      ],
+                      transition: "transform 0.5s",
+                      boxShadow: pressed
+                        ? "0px 0px 10px rgba(0, 0, 0, 0.4)" // Shadow on press
+                        : "none", // No shadow when not pressed
+                    },
+                    android: {
+                      elevation: pressed ? 6 : 0, // Elevation on press
+                    },
+                  }),
+                  styles.button,
+                  {
+                    color: selectedTheme.tint,
+                    fontSize: isMiddle ? 12 : 8,
+                    width: isMiddle ? 220 : 140,
+                    height: isMiddle ? 50 : 38,
+                    backgroundColor: selectedTheme.backgroundSecond,
+                    borderColor: selectedTheme.backgroundNav,
+                  },
+                ]}
+              >
+                {AddedToCartText}
+              </Text>
+            )}
+          </Pressable>
+        </View>
       )}
     </>
   );
@@ -107,13 +160,20 @@ const styles = StyleSheet.create({
     width: "100%",
     marginLeft: 6,
   },
+
   button: {
-    fontSize: 14,
-    fontWeight: "600",
+    fontWeight: "500",
     padding: 5,
-    borderRadius: 8,
-    borderWidth: 1,
     textAlign: "center",
+    borderWidth: 1,
+    cursor: "pointer",
+    position: "relative",
+    zIndex: 0,
+    borderRadius: 10,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    textTransform: "uppercase",
   },
 });
 
