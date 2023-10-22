@@ -112,7 +112,7 @@ const HomeFirstScreen = () => {
           <Text
             style={[
               styles.subTitle,
-              { fontSize: isMiddle ? 34 : 26, lineHeight: isMiddle ? 32 : 28 },
+              { fontSize: isMiddle ? 34 : 26, lineHeight: isMiddle ? 34 : 28 },
             ]}
           >
             {firstScreenSubTitle}
@@ -126,14 +126,16 @@ const HomeFirstScreen = () => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    height: 700
+  },
   containerActivityIndicator: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },
-  container: {
-    flex: 1,
-  },
+  
   imageBackground: {
     width: "100%",
     height: 700,
