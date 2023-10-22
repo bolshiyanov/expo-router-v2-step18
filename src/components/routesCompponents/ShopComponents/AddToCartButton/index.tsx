@@ -14,7 +14,7 @@ const isItemInCart = (cart, itemId) => {
 };
 
 const AddToCartButton = ({ id, name, image, price }) => {
-  const addToCart = "Add to the cart";
+  const addToCart = __("Add to the cart");
   const notAvailable = __("Not available");
   const AddedToCartText = __("Already added to the cart");
 

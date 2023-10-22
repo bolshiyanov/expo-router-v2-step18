@@ -150,7 +150,10 @@ const styles = StyleSheet.create({
     top : 12,
     left: 12,
     flexDirection: 'row',
-    justifyContent: 'flex-start'
+    justifyContent: 'flex-start',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    padding: 6,
+    borderRadius: 6
   }
 });
 
