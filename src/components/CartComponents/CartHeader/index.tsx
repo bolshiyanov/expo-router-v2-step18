@@ -48,7 +48,7 @@ const CartHeader = () => {
         </Text>
       </View>
 
-      {isMiddle && (
+      {!isMiddle && (
         <Pressable onPress={removeAllCart}>
           {({ pressed, hovered }) => (
             <TabBarIcon

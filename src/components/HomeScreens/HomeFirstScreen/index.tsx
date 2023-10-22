@@ -10,18 +10,23 @@ import {
 } from "react-native";
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/components/utils/hooks/redux";
-import Colors, { firstScreenSubTitle } from "config";
+
 import { fetchData } from "@/store/reducers/PostsDataSlice";
 import baner from "@/assets/images/banner-3.jpg";
-import { firstScreenTitle } from "config";
+
 import { useWidth } from "@/components/utils/useWidth";
 import { TabBarIcon } from "@/components/navigatorComponents/tab-bar-icon";
 import { __ } from "@/components/LanguageComponents/TranslateComponent/systemTranslatre";
 import { currentPageChangeAction } from "@/store/reducers/CurrentPageSlice";
+import Colors from "config";
+import FirstScreenButton from "../FirstScreenButton";
 
 const HomeFirstScreen = () => {
   const textTitle = __("0001");
-  const ILookAJobTitle = __("I look a job")
+  const ILookAJobTitle = __("I look a job");
+  const firstScreenTitle = "Expo, like you've never seen it before";
+  const firstScreenSubTitle =
+    "Craft Stunning Static Websites, Stores, and Blogs for Google Search Excellence with React-Native Expo";
   const isMiddle = useWidth(768);
   const theme = useAppSelector((state) => state.themeSlice.theme);
   const selectedTheme = theme === "dark" ? Colors.dark : Colors.light;
@@ -51,35 +56,72 @@ const HomeFirstScreen = () => {
   return (
     <View style={[styles.container]}>
       <ImageBackground
-        source={require("@/assets/images/backgrondBase.jpg")}
-        style={[styles.image,{zIndex: 1}]}
+        source={require("@/assets/images/backgroundClouds.webp")}
+        style={[styles.image, { zIndex: 1 }]}
       />
-      <View style={[styles.lookJob, { zIndex: 2 }]}>
-        <TabBarIcon
-          color={selectedTheme.check}
-          style={[
-            Platform.select({
-              web: {
-                transform: [{ scale: 1.1 }],
-              },
-            }),
-          ]}
-          name="briefcase"
+      <View
+        style={[
+          styles.imageContainer,
+          {
+            position: "absolute",
+            right: isMiddle ? 80 : -180,
+            top: 0,
+            zIndex: 1,
+          },
+        ]}
+      >
+        <Image
+          source={require("@/assets/images/bolshiyanovMonoChrome.png")}
+          style={styles.imageBackground}
         />
-        <Text style={{ color: selectedTheme.check, fontWeight: '800', fontSize: 18, paddingLeft: 12}}>{ILookAJobTitle}</Text>
       </View>
-      <Image
-        source={require("@/assets/images/banner-4.png")}
-        style={styles.imageBackground}
-      />
-      
-      <View style={[styles.overlay]}>
-        <Text style={[styles.title, { fontSize: isMiddle ? 90 : 50 }]}>
-          {firstScreenTitle}
-        </Text>
-        <Text style={[styles.subTitle, { fontSize: isMiddle ? 90 : 47 }]}>
-          {firstScreenSubTitle}
-        </Text>
+
+      <View style={styles.contentContainer}>
+        <View style={styles.textContentContainer}>
+          <View style={[styles.lookJob, {}]}>
+            <TabBarIcon
+              color="#caccce"
+              style={[
+                ,
+                Platform.select({
+                  web: {
+                    transform: [{ scale: 1.1 }],
+                  },
+                }),
+              ]}
+              name="briefcase"
+            />
+            <Text
+              style={{
+                color: "#caccce",
+                fontWeight: "400",
+                fontSize: 18,
+                paddingLeft: 12,
+              }}
+            >
+              {ILookAJobTitle}
+            </Text>
+          </View>
+
+          <Text
+            style={[
+              styles.title,
+              { fontSize: isMiddle ? 64 : 40, lineHeight: isMiddle ? 56 : 42 },
+            ]}
+          >
+            {firstScreenTitle}
+          </Text>
+          <Text
+            style={[
+              styles.subTitle,
+              { fontSize: isMiddle ? 34 : 26, lineHeight: isMiddle ? 32 : 28 },
+            ]}
+          >
+            {firstScreenSubTitle}
+          </Text>
+          
+        </View>
+        <FirstScreenButton />
       </View>
     </View>
   );
@@ -96,13 +138,17 @@ const styles = StyleSheet.create({
   },
   imageBackground: {
     width: "100%",
-    height: 600,
+    height: 700,
     alignSelf: "center",
     resizeMode: "cover",
     zIndex: 1,
     position: "absolute",
     top: 0,
     left: 0,
+  },
+  imageContainer: {
+    height: 600,
+    width: 387,
   },
   image: {
     width: "100%",
@@ -119,21 +165,36 @@ const styles = StyleSheet.create({
     zIndex: 3,
   },
   title: {
-    fontSize: 100,
     fontWeight: "800",
-    color: "rgba(255,255,255, 0.8)",
+    color: "rgba(255,255,255, 0.9)",
     textShadowColor: "black",
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 7,
-    marginBottom: -12,
+    paddingTop: 12,
   },
   subTitle: {
-    fontSize: 100,
-    fontWeight: "800",
-    color: "rgba(0,0,0, 0.8)",
-    textShadowColor: "white",
+    fontWeight: "600",
+    color: "rgba(255,255,255, 0.9)",
+    textShadowColor: "black",
     textShadowOffset: { width: 0, height: 0 },
     textShadowRadius: 7,
+    paddingTop: 24,
+  },
+  contentContainer: {
+    flex: 1,
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    position: "absolute",
+    top: 64,
+    left: 24,
+    zIndex: 2,
+    height: 500
+  },
+  textContentContainer: {
+    flex: 1,
+    width: "54%",
+    alignItems: "flex-start",
+    justifyContent: "flex-start",
   },
   text: {
     position: "absolute",
@@ -146,15 +207,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   lookJob: {
-    position: 'absolute',
-    top : 12,
-    left: 12,
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    padding: 6,
-    borderRadius: 6
-  }
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "flex-start",
+    alignItems: "center",
+    backgroundColor: "#18191a",
+    borderRadius: 14,
+    padding: 4,
+    borderColor: "#caccce",
+    borderWidth: 1,
+    paddingHorizontal: 12,
+  },
 });
 
 export default HomeFirstScreen;
